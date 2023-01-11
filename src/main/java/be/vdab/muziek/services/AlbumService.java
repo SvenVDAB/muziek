@@ -26,6 +26,10 @@ public class AlbumService {
         return albumRepository.findByJaar(jaar);
     }
 
+    public List<Album> findByArtiestId(long artiestId) {
+        return albumRepository.findByArtiestId(artiestId);
+    }
+
     public Optional<Album> findById(long id) {
         return albumRepository.findById(id);
     }

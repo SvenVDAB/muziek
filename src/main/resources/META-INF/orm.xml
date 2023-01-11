@@ -19,4 +19,11 @@
             order by a.naam
         </query>
     </named-query>
+    <named-query name='Album.findByArtiestId'>
+        <query>
+            select albums from Artiest a
+            where a.id = :artiestId
+            order by a.naam
+        </query>
+    </named-query>
 </entity-mappings>

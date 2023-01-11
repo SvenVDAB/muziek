@@ -36,6 +36,15 @@ public class AlbumRepository {
                 .getResultList();
     }
 
+    public List<Album> findByArtiestId(long artiestId) {
+        return manager
+                .createNamedQuery("Album.findByArtiestId",
+                        Album.class)
+                .setHint("jakarta.persistence.loadgraph", manager.createEntityGraph(Album.MET_ARTIEST_EN_LABEL))
+                .setParameter("artiestId", artiestId)
+                .getResultList();
+    }
+
     public Optional<Album> findById(long id) {
         return Optional.ofNullable(manager.find(Album.class, id));
     }
