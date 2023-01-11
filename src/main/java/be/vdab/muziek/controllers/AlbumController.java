@@ -51,4 +51,9 @@ public class AlbumController {
             return new ModelAndView("album");
         }
     }
+
+    @GetMapping("jaar/{jaar}")
+    public ModelAndView jaar(@PathVariable int jaar) {
+        return new ModelAndView("jaar", "alleAlbums", albumService.findByJaar(jaar));
+    }
 }

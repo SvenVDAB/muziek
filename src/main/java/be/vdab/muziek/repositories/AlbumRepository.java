@@ -21,15 +21,19 @@ public class AlbumRepository {
 
     public List<Album> findAll() {
         return manager
-                .createQuery("""
-                        select a 
-                        from Album a 
-                        order by a.naam
-                        """,
-                Album.class)
+                .createNamedQuery("Album.findAll", Album.class)
                 .setHint("jakarta.persistence.loadgraph", manager.createEntityGraph(Album.MET_ARTIEST_EN_LABEL))
                 .getResultList();
 
+    }
+
+    public List<Album> findByJaar(int jaar) {
+        return manager
+                .createNamedQuery("Album.findByJaar",
+                        Album.class)
+                .setHint("jakarta.persistence.loadgraph", manager.createEntityGraph(Album.MET_ARTIEST_EN_LABEL))
+                .setParameter("jaar", jaar)
+                .getResultList();
     }
 
     public Optional<Album> findById(long id) {

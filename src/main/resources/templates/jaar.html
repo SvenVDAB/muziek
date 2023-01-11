@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments::head(title='${jaar}')}"></head>
+<body>
+<h1 th:text="${jaar}"></h1>
+<ul>
+    <li th:each="album: ${alleAlbums}" th:object="${album}">
+        <a th:href="@{/album/{id}(id=*{id})}"
+           th:text="|*{naam} - *{artiest.naam}|"></a>
+    </li>
+</ul>
+</body>
+</html>

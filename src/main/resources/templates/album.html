@@ -5,7 +5,14 @@
 <body>
 <h1 th:if="not ${album}" th:text="|Album ${id} niet gevonden|"></h1>
 <th:block th:if="${album}" th:object="${album}">
-    <h1 th:text="|*{naam} - *{artiest.naam} (*{jaar}) *{label.naam}|"></h1>
+<!--    <h1 th:text="|*{naam} - *{artiest.naam} (*{jaar}) *{label.naam}|"></h1>
+    <a th:href="@{/album/{id}(id=*{id})}"
+       th:text="|*{naam} - *{artiest.naam} (*{jaar})|"></a>-->
+    <h1>
+        <span th:text="|*{naam} - *{artiest.naam} |"></span>
+        <a th:href="@{/album/jaar/{jaar}(jaar=*{jaar})}" th:text="*{jaar} "></a>
+        <span th:text="*{label.naam}"></span>
+    </h1>
     <ul>
         <li th:each="track: ${album.tracks}" th:object="${track}" th:text="|*{naam} *{tijd}|"></li>
     </ul>

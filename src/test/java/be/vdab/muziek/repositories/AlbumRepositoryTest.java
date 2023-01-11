@@ -62,6 +62,24 @@ public class AlbumRepositoryTest extends AbstractTransactionalJUnit4SpringContex
     }
 
     @Test
+    void findByJaarGeeftAlbumsVanDatJaar() {
+        var albums = repository.findByJaar(1);
+        manager.clear();
+        assertThat(albums)
+                .hasSize(countRowsInTableWhere(ALBUMS, "jaar = 1"))
+                .allSatisfy(
+                        album -> assertThat(album.getJaar()).isEqualTo(1)
+                        )
+                .extracting(Album::getNaam)
+                .isSortedAccordingTo(String::compareToIgnoreCase);
+        assertThat(albums)
+                .extracting(Album::getArtiest)
+                .extracting(Artiest::getNaam)
+                .isNotNull()
+                .contains("test");
+    }
+
+    @Test
     void tracksLezen() {
         assertThat(repository.findById(idVanTestAlbum()))
                 .hasValueSatisfying(
