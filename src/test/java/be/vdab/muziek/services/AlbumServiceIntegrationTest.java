@@ -12,9 +12,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest(showSql = false)
 @Import({ AlbumService.class, AlbumRepository.class })
-//@Sql("")
 @Sql({"/insertArtiest.sql", "/insertLabel.sql", "/insertAlbum.sql"})
-public class AlbumServiceIntegrationTest extends AbstractTransactionalJUnit4SpringContextTests {
+class AlbumServiceIntegrationTest extends AbstractTransactionalJUnit4SpringContextTests {
     private final static String ALBUMS = "albums";
     private final AlbumService service;
     private final EntityManager manager;

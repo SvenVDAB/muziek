@@ -1,6 +1,7 @@
 package be.vdab.muziek.domain;
 
 import jakarta.persistence.*;
+import org.hibernate.validator.constraints.Range;
 
 import java.time.LocalTime;
 import java.util.Collections;
@@ -30,6 +31,8 @@ public class Album {
     private  String naam;
     private int jaar;
     private long barcode;
+
+    @Range(min=0, max=10)
     private int score;
 
     @ElementCollection

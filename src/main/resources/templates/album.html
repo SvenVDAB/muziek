@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="nl" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments::head(title=${album} ? ${album.naam} :
-'Pizza niet gevonden')}"></head>
+'Album niet gevonden')}"></head>
 <body>
+<h1 th:if="not ${album}" th:text="|Album ${id} niet gevonden|"></h1>
 <th:block th:if="${album}" th:object="${album}">
     <h1 th:text="|*{naam} - *{artiest.naam} (*{jaar}) *{label.naam}|"></h1>
     <ul>
@@ -10,7 +11,7 @@
     </ul>
     <div th:text="|Totale tijd: ${album.totalTime}|"></div>
     <form th:object="${scoreForm}" method="post" th:action="@{/album/{id}/score(id=${album.id})}">
-        <label>Score:
+        <label>Score:<span th:errors="*{score}"></span>
             <input th:field="*{score}" type="number" required value="0" size="2" maxlength="2" min="0" max="10">
         </label>
         <button>Wijzigen</button>

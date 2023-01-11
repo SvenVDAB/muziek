@@ -19,7 +19,6 @@ public class AlbumRepositoryTest extends AbstractTransactionalJUnit4SpringContex
     private final AlbumRepository repository;
     private final EntityManager manager;
     private static final String ALBUMS = "albums";
-    private static final String TRACKS = "tracks";
 
     public AlbumRepositoryTest(AlbumRepository repository, EntityManager manager) {
         this.repository = repository;
@@ -34,7 +33,11 @@ public class AlbumRepositoryTest extends AbstractTransactionalJUnit4SpringContex
     void findById() {
         assertThat(repository.findById(idVanTestAlbum()))
                 .hasValueSatisfying(
-                        album -> assertThat(album.getNaam()).isEqualTo("test")
+                        album -> {
+                            assertThat(album.getNaam()).isEqualTo("test");
+                            assertThat(album.getArtiest().getNaam()).isEqualTo("test");
+                            assertThat(album.getLabel().getNaam()).isEqualTo("test");
+                        }
                 );
     }
 

@@ -34,13 +34,6 @@ public class AlbumController {
         return modelandview;
     }
 
-/*    @PostMapping("{id}/score")
-    public ModelAndView geefScore(ScoreForm scoreForm, @PathVariable long id) {
-        albumService.setScore(id, scoreForm.score());
-        return new ModelAndView("redirect:/album/{id}/score")
-                .addObject(scoreForm);
-    }*/
-
     @PostMapping("{id}/score")
     public ModelAndView wijzigScore(@PathVariable long id, @Valid ScoreForm form, Errors errors,
                                     RedirectAttributes redirect) {
